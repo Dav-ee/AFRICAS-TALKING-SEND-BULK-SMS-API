@@ -1,6 +1,6 @@
 // Set your app credentials
 const credentials = {
-    apiKey: 'YOUR APP API KEY',
+    apiKey: 'YOUR API KEY HERE',
     username: 'YOUR APP USERNAME',
 }
 
@@ -8,25 +8,46 @@ const credentials = {
 const AfricasTalking = require('africastalking')(credentials);
 // Get the SMS service
 const sms = AfricasTalking.SMS;
+const phone_number = [
+    {
+        name: 'XXX',
+        phone: "+254XXXXX"
+    },
+    {
+        name: 'XXX',
+        phone: "+254XXXXX"
+    },
+    {
+        name: 'XXX',
+        phone: "+254XXXXX"
+    },
+    {
+        name: 'XXX',
+        phone: "+254XXXXX"
+    },
+]
 
 function sendMessage() {
-    const options = {
-        // Set the numbers you want to send to in international format
-        to: ['+254XXXX', '+254XXXX'],
-        // Set your message
-        message: "Hello World!",
-        // Set your shortCode or senderId  //optional
-        //from: 'XXYYZZ'
-    }
+    phone_number.map((item) => {
 
-    // That’s it, hit send and we’ll take care of the rest
-    sms.send(options)
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.log(error)
-        });
+        const options = {
+            to: item.phone,
+            message: "Hello there," + item.name + "! Welcome to DAV_EE INC. We are proud of you."
+            //  from:"INVOICER"
+        }
+
+        sms.send(options)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+    });
+
+
+
 }
 
 sendMessage();
